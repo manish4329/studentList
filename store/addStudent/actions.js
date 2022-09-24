@@ -3,13 +3,12 @@ export const ADD = (data) => {
     type: 'ADD',
     payload: {
       id: new Date().getTime().toString(),
-      name: data.name,
-      age: data.age,
+      data: data,
     },
   };
 };
 
-export const DELETE = id => {
+export const DELETE = (id) => {
   return {
     type: 'DELETE',
     id,

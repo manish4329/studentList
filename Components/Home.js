@@ -1,16 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
+import * as React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {DELETE} from '../store/addStudent/actions';
 
 const Home = ({navigation}) => {
-//   const [name, setName] = useState('manish');
-//   const [age, setAge] = useState('26');
-//   const [student, setStudent] = useState([
-//     {name: 'manish', age: '26', key: 1},
-//     {name: 'karan', age: '27', key: 2},
-//     {name: 'sonu', age: '28', key: 3},
-//   ]);
-    const list = useSelector(state => state.addStudent.value);
+  const list = useSelector(state => state.addStudent.value);
+  const dispatch = useDispatch();
+
 
   return (
     <View style={styles.home}>
@@ -18,8 +15,9 @@ const Home = ({navigation}) => {
         return (
           <View key={item.id}>
             <Text>
-              {item.name} is {item.age} years old.
+              {item.data}
             </Text>
+            <Button title="delete" onPress={() => dispatch(DELETE(item.id))} />
           </View>
         );
       })}

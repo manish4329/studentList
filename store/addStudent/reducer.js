@@ -1,18 +1,17 @@
 const initialState = {
-  value: [{name:Manish, age:26, id: 1}],
+  value: [],
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD':
-      const {id, name, age} = action.payload;
+      const {id, data} = action.payload;
       return {
         ...state,
         value: [
           ...state.value,
           {
             id: id,
-            name: name,
-            age: age,
+            data: data,
           },
         ],
       };
