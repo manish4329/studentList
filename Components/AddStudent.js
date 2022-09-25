@@ -11,7 +11,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
     .min(2, 'Too Short!')
     .max(20, 'Too Long!')
     .required('Required'),
-  age: Yup.number.moreThan(18, 'Need to be 18+').required('Required'),
+  age: Yup.number().moreThan(18, 'Need to be 18+').required('Required'),
 });
 
 
