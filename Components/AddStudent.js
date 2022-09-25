@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
-import {Field, Form, Formik} from 'formik';
-import { TextInput } from 'react-native';
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Formik} from 'formik';
 import {ADD} from '../store/addStudent/actions';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -22,21 +21,24 @@ const AddStudent = () => {
       initialValues={{name: '', age: ''}}
       validationSchema={DisplayingErrorMessagesSchema}
       onSubmit={values => {
-        dispatch(ADD([`${values.name} is ${values.age} years old.`]));
+       dispatch(ADD([`${values.name} is ${values.age} years old.`]));
       }}>
       {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
-        <Form>
           <View style={styles.form}>
             <Text style={styles.heading}>Enter your name</Text>
-            <Field
+            <TextInput
               style={styles.input}
               onChangeText={handleChange('name')}
               onBlur={handleBlur('name')}
               value={values.name}
             />
-            {touched.name && errors.name && <Text>{errors.name}</Text>}
+            {touched.name && errors.name && (
+              <View>
+                <Text>{errors.name}</Text>
+              </View>
+            )}
             <Text style={styles.heading}>Enter your age</Text>
-            <Field
+            <TextInput
               style={styles.input}
               onChangeText={handleChange('age')}
               onBlur={handleBlur('age')}
@@ -44,13 +46,14 @@ const AddStudent = () => {
               keyboardType="numeric"
             />
             {touched.age && errors.age && (
-              <Text>{errors.age}</Text>
+              <View>
+                <Text>{errors.age}</Text>
+              </View>
             )}
             <View style={styles.button}>
               <Button onPress={handleSubmit} color="maroon" title="Submit" />
             </View>
           </View>
-        </Form>
       )}
     </Formik>
   );
