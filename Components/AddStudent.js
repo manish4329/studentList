@@ -14,46 +14,48 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
 });
 
 
-const AddStudent = () => {
+const AddStudent = ({navigation}) => {
   const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{name: '', age: ''}}
       validationSchema={DisplayingErrorMessagesSchema}
-      onSubmit={values => {
-       dispatch(ADD([`${values.name} is ${values.age} years old.`]));
+      onSubmit={(values, {resetForm}) => {
+        dispatch(ADD([`${values.name} is ${values.age} years old.`]));
+        resetForm();
+        navigation.navigate('Home');
       }}>
       {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
-          <View style={styles.form}>
-            <Text style={styles.heading}>Enter your name</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
-            />
-            {touched.name && errors.name && (
-              <View>
-                <Text>{errors.name}</Text>
-              </View>
-            )}
-            <Text style={styles.heading}>Enter your age</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={handleChange('age')}
-              onBlur={handleBlur('age')}
-              value={values.age}
-              keyboardType="numeric"
-            />
-            {touched.age && errors.age && (
-              <View>
-                <Text>{errors.age}</Text>
-              </View>
-            )}
-            <View style={styles.button}>
-              <Button onPress={handleSubmit} color="maroon" title="Submit" />
+        <View style={styles.form}>
+          <Text style={styles.heading}>Enter your name</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={handleChange('name')}
+            onBlur={handleBlur('name')}
+            value={values.name}
+          />
+          {touched.name && errors.name && (
+            <View style={styles.error}>
+              <Text style={styles.errorText}>{errors.name}</Text>
             </View>
+          )}
+          <Text style={styles.heading}>Enter your age</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={handleChange('age')}
+            onBlur={handleBlur('age')}
+            value={values.age}
+            keyboardType="numeric"
+          />
+          {touched.age && errors.age && (
+            <View style={styles.error}>
+              <Text style={styles.errorText}>{errors.age}</Text>
+            </View>
+          )}
+          <View style={styles.button}>
+            <Button onPress={handleSubmit} color="#5F6F94" title="Submit" />
           </View>
+        </View>
       )}
     </Formik>
   );
@@ -64,11 +66,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 50,
+    backgroundColor: '#4C0033',
   },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: 'white'
   },
   input: {
     borderWidth: 1,
@@ -77,9 +81,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 6,
     borderRadius: 6,
+    color: 'white'
+  },
+  error: {
+    padding: 3,  
+  },
+  errorText:{
+  color: 'white',
   },
   button: {
-    padding: 10,
+    padding: 15,
   },
 });
 
