@@ -1,5 +1,7 @@
+
 const initialState = {
   value: [],
+  cheq: false,
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,7 +16,22 @@ const reducer = (state = initialState, action) => {
             data: data,
           },
         ],
+        cheq: false,
       };
+    
+    // case 'CHECK':
+    //   return {
+    //     ...state,
+    //     cheq: cheq,
+    //   };  
+    
+    // case 'UNCHECK':
+    //   setcheq = !cheq;
+    //   return {
+    //     ...state,
+    //     checq: setcheq,
+    //   };
+      
     case 'DELETE':
       const newValue = state.value.filter(elem => elem.id !== action.id);
       return {

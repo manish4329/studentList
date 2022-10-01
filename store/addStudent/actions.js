@@ -14,3 +14,17 @@ export const DELETE = (id) => {
     id,
   };
 };
+
+export const CHECK = (id) => {
+  return {
+    type: 'CHECK',
+    id,
+  };
+};
+
+export const UNCHECK = (id) => {
+  return {
+    type: 'UNCHECK',
+    id,
+  };
+};

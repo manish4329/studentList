@@ -42,7 +42,6 @@ const App = () => {
             name="Home"
             component={Home}
             options={({navigation}) => ({
-              title: 'Student List',
               headerRight: () => (
                 <View style={{flexDirection: 'row'}}>
                   {renderUserMenu(navigation)}

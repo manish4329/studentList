@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {DELETE} from '../store/addStudent/actions';
+import {CHECK, DELETE, UNCHECK} from '../store/addStudent/actions';
 import {Icon} from '@rneui/themed';
 import {CheckBox} from '@rneui/base';
 
@@ -15,26 +15,23 @@ const Home = () => {
       <View>
         <Text style={styles.heading}> List of students</Text>
       </View>
-
       {list.map(item => {
         return (
           <View style={styles.tab} key={item.id}>
             <CheckBox
-              style={styles.checkbox}
+              containerStyle={styles.checkbox}
               checkedIcon={
                 <Icon
                   name="radio-button-checked"
                   type="material"
-                  color="green"
-                  size={25}
+                  color="white"
                 />
               }
               uncheckedIcon={
                 <Icon
                   name="radio-button-unchecked"
                   type="material"
-                  color="grey"
-                  size={25}
+                  color="#5F6F94"
                 />
               }
               checked={check}
@@ -75,8 +72,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   checkbox: {
-  alignItems:'center',
-    
+    backgroundColor: '#4C0033',
+    marginTop: 25,
   },
   tabText: {
     color: 'white',
