@@ -18,10 +18,10 @@ const AddStudent = ({navigation}) => {
   const dispatch = useDispatch();
   return (
     <Formik
-      initialValues={{name: '', age: ''}}
+      initialValues={{name: '', age: '', isPass: false}}
       validationSchema={DisplayingErrorMessagesSchema}
       onSubmit={(values, {resetForm}) => {
-        dispatch(ADD([`${values.name} is ${values.age} years old.`]));
+        dispatch(ADD(values));
         resetForm();
         navigation.navigate('Home');
       }}>
@@ -52,6 +52,7 @@ const AddStudent = ({navigation}) => {
               <Text style={styles.errorText}>{errors.age}</Text>
             </View>
           )}
+
           <View style={styles.button}>
             <Button onPress={handleSubmit} color="#5F6F94" title="Submit" />
           </View>

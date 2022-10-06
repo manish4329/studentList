@@ -1,45 +1,47 @@
-
 const initialState = {
-  value: [],
-  cheq: false,
+	students: [],
 };
 const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'ADD':
-      const {id, data} = action.payload;
-      return {
-        ...state,
-        value: [
-          ...state.value,
-          {
-            id: id,
-            data: data,
-          },
-        ],
-        cheq: false,
-      };
-    
-    // case 'CHECK':
-    //   return {
-    //     ...state,
-    //     cheq: cheq,
-    //   };  
-    
-    // case 'UNCHECK':
-    //   setcheq = !cheq;
-    //   return {
-    //     ...state,
-    //     checq: setcheq,
-    //   };
-      
-    case 'DELETE':
-      const newValue = state.value.filter(elem => elem.id !== action.id);
-      return {
-        ...state,
-        value: newValue,
-      };
-    default:
-      return state;
-  }
+	switch (action.type) {
+		case 'ADD':
+			const { data } = action.payload;
+			state = {
+				...state,
+				students: [...state.students, data],
+			};
+			return state;
+		case 'CHECK':
+			const index = action.payload.index;
+			const student = state.students[index];
+			student.isPass = !student.isPass;
+			state = {
+				...state,
+				students: [
+					...state.students.slice(0, index),
+					student,
+					...state.students.slice(index + 1, state.students.length),
+				],
+			};
+			return state;
+		case 'DELETE':
+			const id = action.payload.index;
+			const newValue = state.students[id];
+			const checkTrue = state.students.filter(
+				(elem) => elem.isPass === true,
+			);
+			const checkClicked = checkTrue.filter((elem) => elem !== newValue);
+			const checkRest = state.students.filter(
+				(elem) => elem.isPass === false,
+			);
+			const newList = checkClicked.concat(checkRest);
+			console.log(newValue);
+			state = {
+				...state,
+				students: newList,
+			};
+			return state;
+		default:
+			return state;
+	}
 };
 export default reducer;
