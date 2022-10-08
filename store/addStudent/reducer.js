@@ -34,7 +34,6 @@ const reducer = (state = initialState, action) => {
 				(elem) => elem.isPass === false,
 			);
 			const newList = checkClicked.concat(checkRest);
-			console.log(newValue);
 			state = {
 				...state,
 				students: newList,
