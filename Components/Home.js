@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-	StyleSheet,
-	Text,
-	View,
-	ScrollView,
-	SafeAreaView,
-} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { CHECK, DELETE } from '../store/addStudent/actions';
 import { Icon } from '@rneui/themed';
